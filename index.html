@@ -25,6 +25,49 @@
             overflow-x: hidden;
         }
 
+        /* Overlay para habilitar el sonido en la primera interacción */
+        #audioOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        #audioOverlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .play-card {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .play-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .play-card p {
+            color: #a5b4fc;
+            font-size: 1rem;
+        }
+
         .hero {
             margin: auto;
             max-width: 600px;
@@ -68,7 +111,6 @@
             margin-bottom: 28px;
         }
 
-        /* Botón de Silenciar / Mute flotante */
         .mute-btn {
             display: inline-flex;
             align-items: center;
@@ -82,7 +124,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
         }
 
         .mute-btn:hover {
@@ -99,7 +140,6 @@
         footer a {
             color: #a5b4fc;
             text-decoration: none;
-            transition: color 0.2s;
         }
 
         footer a:hover {
@@ -115,6 +155,14 @@
 </head>
 <body>
 
+    <!-- Capa interactiva inicial -->
+    <div id="audioOverlay" onclick="enableAudio()">
+        <div class="play-card">
+            <h2>✨ Danura Studios</h2>
+            <p>Haz clic en cualquier parte para ingresar con música Pop 🎵</p>
+        </div>
+    </div>
+
     <div></div>
 
     <main class="hero">
@@ -122,15 +170,16 @@
         <h1>Danura Studios</h1>
         <p class="subtitle">Desarrollando experiencias interactivas y aplicaciones móviles de próxima generación.</p>
 
-        <!-- Botón de Silenciar / Activar Sonido -->
-        <button class="mute-btn" id="muteBtn" onclick="toggleMute(event)">
+        <!-- Botón para mutear / desmutear -->
+        <button class="mute-btn" onclick="toggleMute()">
             <span id="btnIcon">🔊</span> <span id="btnText">Silenciar Música</span>
         </button>
-        
-        <audio id="bgMusic" loop autoplay preload="auto">
-            <source src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Lounge_Loop.ogg" type="audio/ogg">
-        </audio>
     </main>
+
+    <!-- Pista Pop / Synth-Pop No Copyright en formato MP3 -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=pop-dance-110826.mp3" type="audio/mpeg">
+    </audio>
 
     <footer>
         <p>© 2026 Danura Studios. Todos los derechos reservados. | <a href="/privacy.html">Política de Privacidad</a></p>
@@ -138,34 +187,22 @@
 
     <script>
         const audio = document.getElementById('bgMusic');
+        const overlay = document.getElementById('audioOverlay');
         const btnText = document.getElementById('btnText');
         const btnIcon = document.getElementById('btnIcon');
 
-        // Intento de reproducción directa
-        function startAudio() {
+        audio.volume = 0.5; // Volumen al 50%
+
+        function enableAudio() {
             audio.play().then(() => {
-                btnText.textContent = "Silenciar Música";
-                btnIcon.textContent = "🔊";
-            }).catch(() => {
-                // Si el navegador bloquea el autoplay, se activa al primer clic o toque en cualquier parte
-                btnText.textContent = "Activar Música";
-                btnIcon.textContent = "🔇";
+                overlay.classList.add('hidden');
+            }).catch(err => {
+                console.log("Error de audio: ", err);
+                overlay.classList.add('hidden');
             });
         }
 
-        // Iniciar audio al cargar o en la primera interacción
-        window.addEventListener('DOMContentLoaded', startAudio);
-        document.body.addEventListener('click', function initOnClick() {
-            if (audio.paused) {
-                audio.play();
-                btnText.textContent = "Silenciar Música";
-                btnIcon.textContent = "🔊";
-            }
-            document.body.removeEventListener('click', initOnClick);
-        }, { once: true });
-
-        function toggleMute(event) {
-            event.stopPropagation(); // Evitar conflicto con el listener del body
+        function toggleMute() {
             if (audio.paused) {
                 audio.play();
                 btnText.textContent = "Silenciar Música";
