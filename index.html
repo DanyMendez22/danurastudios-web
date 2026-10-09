@@ -3,53 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danura Studios</title>
+    <title>Danura Studios - Mobile Apps & Games</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f0c1b;
-            color: #ffffff;
-            text-align: center;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        header { padding: 50px 20px; }
-        h1 { color: #8a5cf6; font-size: 2.5rem; margin-bottom: 10px; }
-        p { color: #cccccc; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.6; }
-        .btn {
-            display: inline-block;
-            background-color: #7c3aed;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        footer {
-            margin-top: 100px;
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
             padding: 20px;
-            border-top: 1px solid #231d3c;
-            font-size: 0.9rem;
-            color: #888;
+            overflow-x: hidden;
         }
-        footer a { color: #a78bfa; text-decoration: none; margin: 0 10px; }
+
+        .hero {
+            margin: auto;
+            max-width: 600px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        p.subtitle {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .audio-controls {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #6366f1;
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .audio-controls:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+        }
+
+        footer {
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        footer a {
+            color: #a5b4fc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>DANURA STUDIOS</h1>
-        <p>Creating engaging and innovative apps experiences.</p>
-        <a href="#about" class="btn">Coming soon</a>
-    </header>
+
+    <div></div>
+
+    <main class="hero">
+        <span class="badge">Estudio Creativo</span>
+        <h1>Danura Studios</h1>
+        <p class="subtitle">Desarrollando experiencias interactivas y aplicaciones móviles de próxima generación.</p>
+
+        <!-- Reproductor de audio libre de copyright -->
+        <button class="audio-controls" id="musicBtn" onclick="toggleAudio()">
+            <span id="btnIcon">🎵</span> <span id="btnText">Reproducir Música de Fondo</span>
+        </button>
+        
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Lounge_Loop.ogg" type="audio/ogg">
+        </audio>
+    </main>
 
     <footer>
-        <p>&copy; 2026 Danura Studios. Todos los derechos reservados.</p>
-        <p>
-            <a href="privacy.html">Política de Privacidad</a> | 
-            <a href="mailto:support@danurastudios.com">Soporte</a> | 
-            <a href="mailto:contact@danurastudios.com">Contacto</a>
-        </p>
+        <p>© 2026 Danura Studios. Todos los derechos reservados. | <a href="/privacy.html">Política de Privacidad</a></p>
     </footer>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                btnText.textContent = "Pausar Música";
+                btnIcon.textContent = "⏸️";
+            } else {
+                audio.pause();
+                btnText.textContent = "Reproducir Música de Fondo";
+                btnIcon.textContent = "🎵";
+            }
+        }
+    </script>
 </body>
 </html>
