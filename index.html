@@ -75,11 +75,12 @@
         }
 
         .logo-img {
-            max-width: 220px;
+            max-width: 260px;
             width: 100%;
             height: auto;
+            border-radius: 16px;
             margin-bottom: 24px;
-            filter: drop-shadow(0 10px 25px rgba(124, 58, 237, 0.5));
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
             animation: float 4s ease-in-out infinite;
         }
 
@@ -122,77 +123,3 @@
             color: #ffffff;
             text-decoration: underline;
         }
-
-        /* Animaciones */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <canvas id="particles"></canvas>
-
-    <main>
-        <!-- Tu logotipo (Asegúrate de que la imagen se llame logo.png o ajusta el nombre aquí) -->
-        <img src="logo.png" alt="Danura Studios" class="logo-img" onerror="this.style.display='none'">
-        
-        <h1>DANURA STUDIOS</h1>
-        <p class="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
-    </main>
-
-    <footer>
-        <p>© 2026 Danura Studios | <a href="/privacy.html">Política de Privacidad</a></p>
-    </footer>
-
-    <!-- Animación de fondo de estrellas/partículas -->
-    <script>
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        const particles = Array.from({ length: 60 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
-            alpha: Math.random() * 0.7 + 0.3
-        }));
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.speedX;
-                p.y += p.speedY;
-
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
-
-                ctx.fillStyle = `rgba(192, 132, 252, ${p.alpha})`;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
