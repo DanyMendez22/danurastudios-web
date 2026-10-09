@@ -68,26 +68,26 @@
             margin-bottom: 28px;
         }
 
-        .audio-controls {
+        /* Botón de Silenciar / Mute flotante */
+        .mute-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: #6366f1;
+            background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
-            border: none;
-            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
             border-radius: 50px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            backdrop-filter: blur(8px);
         }
 
-        .audio-controls:hover {
-            background: #4f46e5;
+        .mute-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
         }
 
         footer {
@@ -122,12 +122,12 @@
         <h1>Danura Studios</h1>
         <p class="subtitle">Desarrollando experiencias interactivas y aplicaciones móviles de próxima generación.</p>
 
-        <!-- Reproductor de audio libre de copyright -->
-        <button class="audio-controls" id="musicBtn" onclick="toggleAudio()">
-            <span id="btnIcon">🎵</span> <span id="btnText">Reproducir Música de Fondo</span>
+        <!-- Botón de Silenciar / Activar Sonido -->
+        <button class="mute-btn" id="muteBtn" onclick="toggleMute(event)">
+            <span id="btnIcon">🔊</span> <span id="btnText">Silenciar Música</span>
         </button>
         
-        <audio id="bgMusic" loop preload="auto">
+        <audio id="bgMusic" loop autoplay preload="auto">
             <source src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Lounge_Loop.ogg" type="audio/ogg">
         </audio>
     </main>
@@ -141,15 +141,39 @@
         const btnText = document.getElementById('btnText');
         const btnIcon = document.getElementById('btnIcon');
 
-        function toggleAudio() {
+        // Intento de reproducción directa
+        function startAudio() {
+            audio.play().then(() => {
+                btnText.textContent = "Silenciar Música";
+                btnIcon.textContent = "🔊";
+            }).catch(() => {
+                // Si el navegador bloquea el autoplay, se activa al primer clic o toque en cualquier parte
+                btnText.textContent = "Activar Música";
+                btnIcon.textContent = "🔇";
+            });
+        }
+
+        // Iniciar audio al cargar o en la primera interacción
+        window.addEventListener('DOMContentLoaded', startAudio);
+        document.body.addEventListener('click', function initOnClick() {
             if (audio.paused) {
                 audio.play();
-                btnText.textContent = "Pausar Música";
-                btnIcon.textContent = "⏸️";
+                btnText.textContent = "Silenciar Música";
+                btnIcon.textContent = "🔊";
+            }
+            document.body.removeEventListener('click', initOnClick);
+        }, { once: true });
+
+        function toggleMute(event) {
+            event.stopPropagation(); // Evitar conflicto con el listener del body
+            if (audio.paused) {
+                audio.play();
+                btnText.textContent = "Silenciar Música";
+                btnIcon.textContent = "🔊";
             } else {
                 audio.pause();
-                btnText.textContent = "Reproducir Música de Fondo";
-                btnIcon.textContent = "🎵";
+                btnText.textContent = "Activar Música";
+                btnIcon.textContent = "🔇";
             }
         }
     </script>
