@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danura Studios | Mobile Apps & Game Development</title>
-    <meta name="description" content="Danura Studios - Estudio de desarrollo de juegos móviles, aplicaciones y soluciones digitales.">
+    <meta name="description" content="Danura Studios - Estudio especializado en el desarrollo de juegos móviles, aplicaciones y soluciones digitales para iOS y Android.">
     
-    <!-- Google Fonts & FontAwesome Icons -->
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -14,14 +14,14 @@
 
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: rgba(23, 31, 51, 0.7);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --accent: #a855f7;
-            --accent-glow: rgba(168, 85, 247, 0.4);
-            --text-main: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --card-border: rgba(255, 255, 255, 0.15);
+            --primary-glow: #6366f1;
+            --accent-glow: #d946ef;
+            --cyan-glow: #06b6d4;
+            --text-heading: #ffffff;
+            --text-sub: #cbd5e1;
             --text-muted: #94a3b8;
         }
 
@@ -29,22 +29,24 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background: #0f172a;
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-heading);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
         }
 
-        /* Canvas de Partículas Interactivas */
+        /* Interactive Particle Overlay Canvas */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -55,58 +57,473 @@
             pointer-events: none;
         }
 
-        /* Luces de Fondo (Glow Orbs) */
-        .orb {
+        /* Glowing Ambient Background Orbs */
+        .ambient-orb {
             position: fixed;
             border-radius: 50%;
             filter: blur(100px);
             z-index: 0;
-            opacity: 0.5;
-            animation: pulseOrb 8s infinite alternate ease-in-out;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: floatOrb 12s infinite alternate ease-in-out;
         }
         .orb-1 {
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: var(--primary-glow);
+            top: -5%;
+            left: -5%;
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%);
         }
         .orb-2 {
             bottom: -10%;
-            right: -10%;
+            right: -5%;
             width: 50vw;
             height: 50vw;
-            background: var(--accent-glow);
-            animation-delay: -4s;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.45) 0%, transparent 70%);
+            animation-delay: -6s;
         }
 
-        @keyframes pulseOrb {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.4; }
-            100% { transform: scale(1.2) translate(30px, -30px); opacity: 0.7; }
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
         }
 
-        /* Encabezado */
         header {
             position: relative;
             z-index: 10;
-            padding: 24px 8%;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(10px);
-            background: rgba(11, 15, 25, 0.8);
-            border-bottom: 1px solid var(--card-border);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
             color: #ffffff;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .logo i {
-            color: var(--primary);
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6366f1, #d946ef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.5);
+        }
+
+        nav a {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        main {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
+            flex-grow: 1;
+        }
+
+        .hero {
+            text-align: center;
+            max-width: 840px;
+            margin: 20px auto 70px auto;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            border-radius: 99px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(165, 180, 252, 0.4);
+            color: #c7d2fe;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 36px;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.65);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 36px;
+            border-radius: 24px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 18px 40px rgba(168, 85, 247, 0.2);
+            background: rgba(30, 41, 59, 0.85);
+        }
+
+        .card-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(217, 70, 239, 0.25));
+            color: #c7d2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 24px;
+            border: 1px solid rgba(165, 180, 252, 0.3);
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .card p {
+            color: var(--text-sub);
+            line-height: 1.6;
+            font-size: 0.98rem;
+        }
+
+        .upcoming-section {
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(217, 70, 239, 0.2) 100%);
+            border: 1px solid rgba(165, 180, 252, 0.3);
+            border-radius: 28px;
+            padding: 48px 28px;
+            text-align: center;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .upcoming-section h2 {
+            font-size: 1.9rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .upcoming-section p {
+            color: var(--text-sub);
+            max-width: 640px;
+            margin: 0 auto 28px auto;
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 30px 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.92rem;
+            color: var(--text-sub);
+        }
+
+        footer a {
+            color: #a5b4fc;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 18px 5%; }
+            main { padding: 40px 18px; }
+            .card { padding: 28px; }
+            footer { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <span>Danura Studios</span>
+        </a>
+        <nav>
+            <a href="/privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacidad</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">
+                <i class="fa-solid fa-rocket"></i> Games & Mobile App Development
+            </div>
+            <h1>Desarrollo de <span>Juegos Móviles</span> y Aplicaciones</h1>
+            <p class="hero-desc">
+                En <strong>Danura Studios</strong> impulsamos ideas innovadoras creando videojuegos móviles inmersivos, aplicaciones interactivas y soluciones tecnológicas avanzadas para iOS y Android.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:contacto@danurastudios.com" class="btn btn-primary">
+                    <i class="fa-solid fa-envelope"></i> Contactar
+                </a>
+                <a href="/privacy.html" class="btn btn-secondary">
+                    <i class="fa-solid fa-shield-halved"></i> Política de Privacidad
+                </a>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <h3>Juegos Móviles</h3>
+                <p>Diseño y desarrollo de videojuegos interactivos con mecánicas fluidas, gráficos atractivos y experiencias inmersivas para usuarios móviles.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <h3>Aplicaciones Móviles</h3>
+                <p>Creación de aplicaciones nativas e híbridas optimizadas para alto rendimiento, usabilidad intuitiva e interfaces modernas.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>Arquitectura Escalable</h3>
+                <p>Desarrollo de software robusto con integración cloud, sistemas de monetización como Google AdMob y análisis de datos en tiempo real.</p>
+            </div>
+        </section>
+
+        <section class="upcoming-section">
+            <h2><i class="fa-solid fa-wand-magic-sparkles" style="color: #c084fc;"></i> Nuevos Proyectos en Camino</h2>
+            <p>Estamos trabajando en nuestros próximos videojuegos y herramientas móviles para Google Play Store y App Store. ¡Muy pronto habrá novedades!</p>
+            <a href="mailto:contacto@danurastudios.com" class="btn btn-secondary">
+                <i class="fa-solid fa-paper-plane"></i> contacto@danurastudios.com
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Danura Studios. Todos los derechos reservados.</p>
+        <p><a href="/privacy.html">Política de Privacidad</a> | Contacto: contacto@danurastudios.com</p>
+    </footer>
+
+    <script>
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+
+            let particlesArray = [];
+            let mouse = { x: null, y: null, radius: 140 };
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            window.addEventListener('mousemove', function(event) {
+                mouse.x = event.x;
+                mouse.y = event.y;
+            });
+
+            window.addEventListener('mouseout', function() {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2.2 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.7;
+                    this.speedY = (Math.random() - 0.5) * 0.7;
+                    this.color = 'rgba(199, 210, 254, ' + (Math.random() * 0.45 + 0.25) + ')';
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                    if (mouse.x !== null && mouse.y !== null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius) {
+                            let force = (mouse.radius - distance) / mouse.radius;
+                            let directionX = dx / distance;
+                            let directionY = dy / distance;
+                            this.x -= directionX * force * 1.8;
+                            this.y -= directionY * force * 1.8;
+                        }
+                    }
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                let numberOfParticles = Math.floor((canvas.width * canvas.height) / 12000);
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                }
+                requestAnimationFrame(animateParticles);
+            }
+
+            initParticles();
+            animateParticles();
+        })();
+    </script>
+</body>
+</html>
