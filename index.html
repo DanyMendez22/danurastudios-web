@@ -181,7 +181,8 @@
     <canvas id="particles"></canvas>
 
     <main>
-        <img src="logo.png" alt="Danura Studios Logo" class="logo-img">
+        <!-- onerror oculta automáticamente la imagen y evita la equis roja si el archivo no se encuentra -->
+        <img src="logo.png" alt="Danura Studios Logo" class="logo-img" onerror="this.style.display='none';">
         
         <h1 id="title">DANURA STUDIOS</h1>
         <p class="subtitle" id="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
@@ -211,7 +212,6 @@
             localStorage.setItem('danura_lang', lang);
         }
 
-        // Cargar idioma guardado previamente si existe
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('danura_lang');
             if (savedLang) {
@@ -220,7 +220,6 @@
             }
         });
 
-        // Partículas
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
 
