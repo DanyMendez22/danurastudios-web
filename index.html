@@ -17,7 +17,7 @@
         }
 
         body {
-            background: #0b0719;
+            background-color: #0b0719;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -38,20 +38,20 @@
         }
 
         .lang-selector select {
-            background: rgba(124, 58, 237, 0.2);
+            background: rgba(124, 58, 237, 0.3);
             color: #d8b4fe;
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            padding: 8px 14px;
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            padding: 8px 16px;
             border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .lang-selector select:hover {
-            background: rgba(124, 58, 237, 0.4);
+            background: rgba(124, 58, 237, 0.6);
             color: #ffffff;
         }
 
@@ -131,3 +131,124 @@
             z-index: 10;
             padding: 24px;
             font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        footer a {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Selector de Idioma -->
+    <div class="lang-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+        </select>
+    </div>
+
+    <!-- Fondos luminosos y partículas -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <canvas id="particles"></canvas>
+
+    <main>
+        <h1 id="title">DANURA STUDIOS</h1>
+        <p class="subtitle" id="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
+    </main>
+
+    <footer>
+        <p>© 2026 Danura Studios | <a href="privacy.html" id="privacyLink">Política de Privacidad</a></p>
+    </footer>
+
+    <script>
+        const translations = {
+            es: {
+                subtitle: "Estudio de desarrollo de aplicaciones y juegos móviles.",
+                privacyText: "Política de Privacidad",
+                privacyHref: "privacy.html"
+            },
+            en: {
+                subtitle: "Mobile application and game development studio.",
+                privacyText: "Privacy Policy",
+                privacyHref: "privacy-en.html"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            
+            document.getElementById('subtitle').textContent = translations[lang].subtitle;
+            const privacyLink = document.getElementById('privacyLink');
+            privacyLink.textContent = translations[lang].privacyText;
+            privacyLink.href = translations[lang].privacyHref;
+            
+            localStorage.setItem('danura_lang', lang);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('danura_lang');
+            if (savedLang) {
+                document.getElementById('languageSelect').value = savedLang;
+                changeLanguage();
+            }
+        });
+
+        // Animación fluida de partículas en el fondo
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = Array.from({ length: 60 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            alpha: Math.random() * 0.7 + 0.3
+        }));
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.fillStyle = `rgba(192, 132, 252, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
