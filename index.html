@@ -75,7 +75,7 @@
         }
 
         .logo-img {
-            max-width: 260px;
+            max-width: 280px;
             width: 100%;
             height: auto;
             border-radius: 16px;
@@ -123,3 +123,37 @@
             color: #ffffff;
             text-decoration: underline;
         }
+
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <canvas id="particles"></canvas>
+
+    <main>
+        <!-- Carga apuntando a logo.jpg -->
+        <img src="logo.jpg" alt="Danura Studios Logo" class="logo-img">
+        
+        <h1>DANURA STUDIOS</h1>
+        <p class="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
+    </main>
+
+    <footer>
+        <p>© 2026 Danura Studios | <a href="/privacy.html">Política de Privacidad</a></p>
+    </footer>
+
+    <!-- Animación de partículas de fondo -->
+    <script>
+        const canvas = document.getElementById('particles');
