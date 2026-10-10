@@ -223,11 +223,14 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('danura_lang');
-            if (savedLang) {
-                document.getElementById('languageSelect').value = savedLang;
-                changeLanguage();
-            }
+            const savedLang = localStorage.getItem('danura_lang') || 'es';
+            document.getElementById('languageSelect').value = savedLang;
+            
+            // Aplicar textos y enlaces correctos desde el inicio según el idioma actual
+            const privacyLink = document.getElementById('privacyLink');
+            document.getElementById('subtitle').textContent = translations[savedLang].subtitle;
+            privacyLink.textContent = translations[savedLang].privacyText;
+            privacyLink.href = translations[savedLang].privacyHref;
         });
 
         // Animación de partículas en el fondo
