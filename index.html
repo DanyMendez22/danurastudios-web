@@ -133,7 +133,7 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Pie de página con Privacidad */
+        /* Pie de página */
         footer {
             position: relative;
             z-index: 10;
@@ -181,7 +181,6 @@
     <canvas id="particles"></canvas>
 
     <main>
-        <!-- onerror oculta automáticamente la imagen y evita la equis roja si el archivo no se encuentra -->
         <img src="logo.png" alt="Danura Studios Logo" class="logo-img" onerror="this.style.display='none';">
         
         <h1 id="title">DANURA STUDIOS</h1>
@@ -192,23 +191,30 @@
         <p>© 2026 Danura Studios | <a href="privacy.html" id="privacyLink">Política de Privacidad</a></p>
     </footer>
 
-    <!-- Script de cambio de idioma y partículas -->
     <script>
         const translations = {
             es: {
                 subtitle: "Estudio de desarrollo de aplicaciones y juegos móviles.",
-                privacyText: "Política de Privacidad"
+                privacyText: "Política de Privacidad",
+                privacyHref: "privacy.html"
             },
             en: {
                 subtitle: "Mobile application and game development studio.",
-                privacyText: "Privacy Policy"
+                privacyText: "Privacy Policy",
+                privacyHref: "privacy-en.html"
             }
         };
 
         function changeLanguage() {
             const lang = document.getElementById('languageSelect').value;
+            
+            // Actualizar texto y enlace
             document.getElementById('subtitle').textContent = translations[lang].subtitle;
-            document.getElementById('privacyLink').textContent = translations[lang].privacyText;
+            const privacyLink = document.getElementById('privacyLink');
+            privacyLink.textContent = translations[lang].privacyText;
+            privacyLink.href = translations[lang].privacyHref;
+            
+            // Guardar preferencia
             localStorage.setItem('danura_lang', lang);
         }
 
@@ -220,6 +226,7 @@
             }
         });
 
+        // Partículas de fondo
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
 
