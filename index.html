@@ -29,6 +29,37 @@
             position: relative;
         }
 
+        /* Selector de Idioma */
+        .lang-selector {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            z-index: 100;
+        }
+
+        .lang-selector select {
+            background: rgba(124, 58, 237, 0.2);
+            color: #d8b4fe;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .lang-selector select:hover {
+            background: rgba(124, 58, 237, 0.4);
+            color: #ffffff;
+        }
+
+        .lang-selector option {
+            background: #0b0719;
+            color: #ffffff;
+        }
+
         /* Canvas de partículas de fondo */
         #particles {
             position: fixed;
@@ -137,24 +168,59 @@
 </head>
 <body>
 
+    <!-- Selector de Idioma -->
+    <div class="lang-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+        </select>
+    </div>
+
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
     <canvas id="particles"></canvas>
 
     <main>
-        <!-- Llamada al archivo logo.png ubicado en la raíz -->
         <img src="logo.png" alt="Danura Studios Logo" class="logo-img">
         
-        <h1>DANURA STUDIOS</h1>
-        <p class="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
+        <h1 id="title">DANURA STUDIOS</h1>
+        <p class="subtitle" id="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
     </main>
 
     <footer>
-        <p>© 2026 Danura Studios | <a href="/privacy.html">Política de Privacidad</a></p>
+        <p>© 2026 Danura Studios | <a href="privacy.html" id="privacyLink">Política de Privacidad</a></p>
     </footer>
 
-    <!-- Animación de partículas de fondo -->
+    <!-- Script de cambio de idioma y partículas -->
     <script>
+        const translations = {
+            es: {
+                subtitle: "Estudio de desarrollo de aplicaciones y juegos móviles.",
+                privacyText: "Política de Privacidad"
+            },
+            en: {
+                subtitle: "Mobile application and game development studio.",
+                privacyText: "Privacy Policy"
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            document.getElementById('subtitle').textContent = translations[lang].subtitle;
+            document.getElementById('privacyLink').textContent = translations[lang].privacyText;
+            localStorage.setItem('danura_lang', lang);
+        }
+
+        // Cargar idioma guardado previamente si existe
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('danura_lang');
+            if (savedLang) {
+                document.getElementById('languageSelect').value = savedLang;
+                changeLanguage();
+            }
+        });
+
+        // Partículas
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
 
