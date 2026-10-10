@@ -1,14 +1,213 @@
-<script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danura Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #0b0719;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Selector de Idioma */
+        .lang-selector {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            z-index: 100;
+        }
+
+        .lang-selector select {
+            background: rgba(124, 58, 237, 0.3);
+            color: #d8b4fe;
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .lang-selector select:hover {
+            background: rgba(124, 58, 237, 0.6);
+            color: #ffffff;
+        }
+
+        .lang-selector option {
+            background: #0b0719;
+            color: #ffffff;
+        }
+
+        /* Canvas de partículas de fondo */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Destellos neón de fondo (Glow) */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .glow-1 {
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #7c3aed 0%, #4c1d95 100%);
+        }
+        .glow-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: #a855f7;
+        }
+
+        /* Contenido Principal */
+        main {
+            position: relative;
+            z-index: 10;
+            margin: auto;
+            padding: 40px 20px;
+            max-width: 700px;
+            animation: fadeIn 1.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-width: 240px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 15px 35px rgba(124, 58, 237, 0.5));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        p.subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: #c084fc;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Pie de página */
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 24px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        footer a {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Selector de Idioma -->
+    <div class="lang-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+        </select>
+    </div>
+
+    <!-- Fondos luminosos y partículas -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <canvas id="particles"></canvas>
+
+    <main>
+        <!-- Llamada al archivo logo.png ubicado en la raíz -->
+        <img src="logo.png" alt="Danura Studios Logo" class="logo-img" onerror="this.style.display='none';">
+        
+        <h1 id="title">DANURA STUDIOS</h1>
+        <p class="subtitle" id="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
+    </main>
+
+    <footer>
+        <p>© 2026 Danura Studios | <a href="/privacy.html" id="privacyLink">Política de Privacidad</a></p>
+    </footer>
+
+    <script>
         const translations = {
             es: {
                 subtitle: "Estudio de desarrollo de aplicaciones y juegos móviles.",
                 privacyText: "Política de Privacidad",
-                privacyHref: "/privacy.html"  // Añadimos la barra diagonal al inicio para buscar desde la raíz exacta
+                privacyHref: "/privacy.html"
             },
             en: {
                 subtitle: "Mobile application and game development studio.",
                 privacyText: "Privacy Policy",
-                privacyHref: "/privacy-en.html" // Añadimos la barra diagonal al inicio
+                privacyHref: "/privacy-en.html"
             }
         };
 
@@ -32,4 +231,46 @@
             privacyLink.textContent = translations[savedLang].privacyText;
             privacyLink.href = translations[savedLang].privacyHref;
         });
+
+        // Animación de partículas en el fondo
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = Array.from({ length: 60 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            alpha: Math.random() * 0.7 + 0.3
+        }));
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.fillStyle = `rgba(192, 132, 252, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
+</body>
+</html>
