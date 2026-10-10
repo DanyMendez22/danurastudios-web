@@ -4,48 +4,239 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - Danura Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            background: #0b0719;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas de partículas de fondo */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Destellos neón de fondo (Glow) */
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .glow-1 {
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #7c3aed 0%, #4c1d95 100%);
+        }
+        .glow-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: #a855f7;
+        }
+
+        /* Contenido Principal */
+        main {
+            position: relative;
+            z-index: 10;
+            width: 100%;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
+            padding: 60px 20px;
+            text-align: left;
+            animation: fadeIn 1.2s ease-out;
         }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
         h1 {
-            color: #111;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
+        .update-date {
+            font-size: 0.9rem;
+            color: #a855f7;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
         h2 {
-            color: #222;
-            margin-top: 20px;
+            font-size: 1.4rem;
+            color: #d8b4fe;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 700;
         }
-        p {
-            margin-bottom: 15px;
+
+        p, li {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+            margin-bottom: 16px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        /* Pie de página */
+        footer {
+            position: relative;
+            z-index: 10;
+            padding: 24px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-align: center;
+            width: 100%;
+        }
+
+        footer a {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <h1>Política de Privacidad</h1>
-    <p><strong>Última actualización:</strong> Octubre 2026</p>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <canvas id="particles"></canvas>
 
-    <p>En <strong>Danura Studios</strong> nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo se recopila, utiliza y protege la información cuando utilizas nuestras aplicaciones y juegos.</p>
+    <main>
+        <a href="index.html" class="back-btn">← Volver al inicio</a>
+        
+        <h1>Política de Privacidad</h1>
+        <p class="update-date">Última actualización: Octubre 2026</p>
 
-    <h2>1. Recopilación de Información</h2>
-    <p>Nuestras aplicaciones pueden recopilar cierta información de forma automática, como el tipo de dispositivo, el sistema operativo y estadísticas de uso anónimas para mejorar el rendimiento del juego.</p>
+        <p>En <strong>Danura Studios</strong>, respetamos y protegemos la privacidad de los usuarios de nuestras aplicaciones móviles, juegos y sitios web. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos su información.</p>
 
-    <h2>2. Uso de la Información</h2>
-    <p>La información recopilada se utiliza exclusivamente para brindar, mantener y mejorar la experiencia de nuestras aplicaciones, así como para resolver errores técnicos.</p>
+        <h2>1. Información que Recopilamos</h2>
+        <p>Nuestras aplicaciones y servicios están diseñados para ofrecer la mejor experiencia con la mínima recopilación de datos necesarios:</p>
+        <ul>
+            <li><strong>Datos no personales:</strong> Podemos recopilar información técnica general como el tipo de dispositivo, sistema operativo y datos de rendimiento para solucionar errores y mejorar nuestros juegos y aplicaciones.</li>
+            <li><strong>Datos proporcionados por el usuario:</strong> Si se comunica con nosotros directamente (por ejemplo, a través de soporte técnico), podemos conservar su correo electrónico y el contenido de su mensaje para responderle.</li>
+        </ul>
 
-    <h2>3. Servicios de Terceros</h2>
-    <p>Nuestras aplicaciones pueden integrar servicios de terceros (como Google Play Services, Unity Ads o herramientas de analítica) que recopilan información bajo sus propias políticas de privacidad.</p>
+        <h2>2. Uso de la Información</h2>
+        <p>La información recopilada se utiliza exclusivamente para:</p>
+        <ul>
+            <li>Operar, mantener y mejorar nuestras aplicaciones y juegos.</li>
+            <li>Detectar, prevenir y solucionar problemas técnicos o de seguridad.</li>
+            <li>Atender consultas de soporte al usuario.</li>
+        </ul>
 
-    <h2>4. Contacto</h2>
-    <p>Si tienes alguna duda sobre esta Política de Privacidad, puedes contactarnos a través de nuestro correo electrónico oficial:</p>
-    <p><strong>Correo electrónico de soporte:</strong> contact@danurastudios.com</p>
+        <h2>3. Servicios de Terceros</h2>
+        <p>Podemos utilizar servicios de terceros confiables (como plataformas de análisis o redes publicitarias estandarizadas) que recopilan información de acuerdo con sus propias políticas de privacidad para ayudarnos a entender el uso general de nuestros productos.</p>
 
+        <h2>4. Privacidad de los Niños</h2>
+        <p>Nuestros productos están desarrollados cumpliendo con las normativas de protección infantil aplicables. No recopilamos conscientemente información personal de menores de edad sin el consentimiento de sus padres o tutores legales.</p>
+
+        <h2>5. Cambios en esta Política de Privacidad</h2>
+        <p>Podemos actualizar nuestra Política de Privacidad periódicamente. Cualquier cambio será publicado en esta misma página con su respectiva fecha de actualización.</p>
+
+        <h2>6. Contacto</h2>
+        <p>Si tiene alguna pregunta o inquietud acerca de esta Política de Privacidad, puede ponerse en contacto con nosotros a través de nuestro sitio web oficial o mediante nuestros canales de soporte.</p>
+    </main>
+
+    <footer>
+        <p>© 2026 Danura Studios. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Partículas de fondo -->
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = Array.from({ length: 60 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            alpha: Math.random() * 0.7 + 0.3
+        }));
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.fillStyle = `rgba(192, 132, 252, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
