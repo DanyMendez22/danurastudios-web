@@ -6,7 +6,7 @@
     <title>Privacy Policy - Danura Studios</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -18,7 +18,7 @@
 
         body {
             background-color: #0b0719;
-            color: #ffffff;
+            color: #e2e8f0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -81,7 +81,7 @@
         main {
             position: relative;
             z-index: 10;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 20px 20px 60px 20px;
         }
@@ -90,23 +90,51 @@
             font-size: clamp(2rem, 4vw, 2.5rem);
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .update-date {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+
         h2 {
             font-size: 1.3rem;
             color: #d8b4fe;
-            margin-top: 30px;
+            margin-top: 32px;
             margin-bottom: 12px;
+            border-bottom: 1px solid rgba(216, 180, 254, 0.15);
+            padding-bottom: 6px;
         }
 
-        p {
-            margin-bottom: 16px;
+        p, li {
             color: #cbd5e1;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 0.98rem;
+            margin-bottom: 14px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a.contact-email {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a.contact-email:hover {
+            text-decoration: underline;
         }
 
         footer {
@@ -116,6 +144,7 @@
             padding: 24px;
             font-size: 0.9rem;
             color: #94a3b8;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
@@ -131,23 +160,44 @@
 
     <main>
         <h1>Privacy Policy</h1>
-        <p>At <strong>Danura Studios</strong>, we respect your privacy and are committed to protecting any personal data you may share with us through our mobile applications and website.</p>
+        <p class="update-date">Last updated: October 10, 2026</p>
+
+        <p>At <strong>Danura Studios</strong>, we take your privacy very seriously. This Privacy Policy outlines how we collect, use, share, and protect your information when you use our website, mobile applications, or games.</p>
 
         <h2>1. Information We Collect</h2>
-        <p>Our mobile applications and services are designed to offer the best experience with minimal data collection. We do not collect sensitive personal information unless strictly necessary for app functionality.</p>
+        <p>We do not directly collect personally identifiable information (such as your full name, physical address, or phone number) unless you voluntarily provide it to us by reaching out via email.</p>
+        <p>However, our applications and website may automatically collect certain technical and usage information through third-party services for core operational, analytics, and monetization purposes.</p>
 
-        <h2>2. Use of Information</h2>
-        <p>Any collected information is used solely to operate, maintain, and improve our services, as well as to ensure app security and performance.</p>
+        <h2>2. Google Advertising (Google AdMob / AdSense)</h2>
+        <p>We use advertising services provided by <strong>Google LLC</strong> and its ad partners (such as Google AdMob and Google AdSense) to serve advertisements within our applications and website.</p>
+        <ul>
+            <li><strong>Cookies &amp; Advertising Identifiers:</strong> Google and its partners use cookies, mobile advertising identifiers (such as Android Advertising ID or Apple IDFA), and similar technologies to serve and personalize ads or measure ad performance.</li>
+            <li><strong>Personalized Advertising:</strong> Subject to your device settings and geographical location (including EEA/UK regulations under GDPR), ads may be personalized based on your interests derived from interactions with other apps or websites.</li>
+            <li><strong>Opting Out:</strong> You can opt out of personalized advertising at any time through your mobile device settings (Settings &gt; Privacy &gt; Ads) or by visiting <a href="https://adssettings.google.com/" target="_blank" rel="noopener" class="contact-email">Google Ad Settings</a>.</li>
+        </ul>
 
-        <h2>3. Third-Party Services</h2>
-        <p>We may use third-party analytics or advertising services (such as Google Play Services or Firebase) that collect standard, anonymous usage information.</p>
+        <h2>3. Third-Party Services &amp; Analytics</h2>
+        <p>To ensure performance, real-time crash monitoring, and continuous improvement of our products, we integrate industry-standard third-party SDKs:</p>
+        <ul>
+            <li><strong>Google Play Services:</strong> Platform authentication and infrastructure support.</li>
+            <li><strong>Google Analytics for Firebase / Firebase Crashlytics:</strong> Anonymous aggregate usage data and crash telemetry.</li>
+        </ul>
+        <p>For more details on how Google processes data, please review the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="contact-email">Google Privacy &amp; Terms Policy</a>.</p>
 
-        <h2>4. Changes to This Policy</h2>
-        <p>We reserve the right to update our Privacy Policy at any time. Any changes will be published directly on this page.</p>
+        <h2>4. Children's Privacy (COPPA)</h2>
+        <p>Our general-audience applications do not knowingly collect personal information from children under the age of 13. For any child-directed or family applications, we strictly configure Google ad services to comply with COPPA and family policies by serving non-personalized, family-safe ads only.</p>
 
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions regarding this Privacy Policy, please contact us through our official support channels.</p>
-        <p>contact@danurastudios.com</p>
+        <h2>5. Your Rights (GDPR / CCPA)</h2>
+        <p>Depending on your location (such as the EEA, UK, or California), you hold rights regarding your data, including requesting access to, restriction of, or deletion of telemetry data. You can manage consent preferences via in-app settings or device privacy controls.</p>
+
+        <h2>6. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time to reflect changes in legal or operational requirements. We encourage you to review this page periodically.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions or inquiries regarding this Privacy Policy, please contact us at:</p>
+
+        <p><strong>Danura Studios</strong><br>
+        Email: <a href="mailto:contact@danurastudios.com" class="contact-email">contact@danurastudios.com</a></p>
     </main>
 
     <footer>
