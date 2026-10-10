@@ -78,9 +78,8 @@
             max-width: 280px;
             width: 100%;
             height: auto;
-            border-radius: 16px;
             margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+            filter: drop-shadow(0 15px 35px rgba(124, 58, 237, 0.5));
             animation: float 4s ease-in-out infinite;
         }
 
@@ -143,8 +142,8 @@
     <canvas id="particles"></canvas>
 
     <main>
-        <!-- Carga apuntando a logo.jpg -->
-        <img src="logo.jpg" alt="Danura Studios Logo" class="logo-img">
+        <!-- Carga apuntando exactamente a logopng -->
+        <img src="logopng" alt="Danura Studios Logo" class="logo-img">
         
         <h1>DANURA STUDIOS</h1>
         <p class="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
@@ -157,3 +156,43 @@
     <!-- Animación de partículas de fondo -->
     <script>
         const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const particles = Array.from({ length: 60 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            alpha: Math.random() * 0.7 + 0.3
+        }));
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.fillStyle = `rgba(192, 132, 252, ${p.alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
