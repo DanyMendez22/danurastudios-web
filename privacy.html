@@ -6,7 +6,7 @@
     <title>Política de Privacidad - Danura Studios</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -18,7 +18,7 @@
 
         body {
             background-color: #0b0719;
-            color: #ffffff;
+            color: #e2e8f0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -81,7 +81,7 @@
         main {
             position: relative;
             z-index: 10;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 20px 20px 60px 20px;
         }
@@ -90,23 +90,51 @@
             font-size: clamp(2rem, 4vw, 2.5rem);
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .update-date {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+
         h2 {
             font-size: 1.3rem;
             color: #d8b4fe;
-            margin-top: 30px;
+            margin-top: 32px;
             margin-bottom: 12px;
+            border-bottom: 1px solid rgba(216, 180, 254, 0.15);
+            padding-bottom: 6px;
         }
 
-        p {
-            margin-bottom: 16px;
+        p, li {
             color: #cbd5e1;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 0.98rem;
+            margin-bottom: 14px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        a.contact-email {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a.contact-email:hover {
+            text-decoration: underline;
         }
 
         footer {
@@ -116,6 +144,7 @@
             padding: 24px;
             font-size: 0.9rem;
             color: #94a3b8;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
@@ -131,23 +160,44 @@
 
     <main>
         <h1>Política de Privacidad</h1>
-        <p>En <strong>Danura Studios</strong> respetamos tu privacidad y nos comprometemos a proteger los datos personales que puedas compartir con nosotros a través de nuestras aplicaciones y sitio web.</p>
+        <p class="update-date">Última actualización: 10 de octubre de 2026</p>
+
+        <p>En <strong>Danura Studios</strong> nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, utilizamos, compartimos y protegemos la información cuando utilizas nuestro sitio web y nuestras aplicaciones o juegos móviles.</p>
 
         <h2>1. Información que recopilamos</h2>
-        <p>Nuestras aplicaciones móviles y servicios están diseñados para ofrecer la mejor experiencia con la mínima recopilación de datos. No recopilamos información personal sensible a menos que sea estrictamente necesaria para el funcionamiento de la aplicación.</p>
+        <p>No recopilamos directamente información de identificación personal (como tu nombre, dirección física o número telefónico) a menos que nos la proporciones voluntariamente al contactarnos por correo electrónico.</p>
+        <p>Sin embargo, nuestras aplicaciones y sitio web pueden recopilar automáticamente cierta información técnica y de uso a través de servicios de terceros para el funcionamiento, analítica y monetización del servicio.</p>
 
-        <h2>2. Uso de la información</h2>
-        <p>Cualquier información recopilada se utiliza exclusivamente para operar, mantener y mejorar nuestros servicios, así como para garantizar la seguridad de las aplicaciones.</p>
+        <h2>2. Publicidad de Google (Google AdMob / AdSense)</h2>
+        <p>Utilizamos servicios de publicidad proporcionados por <strong>Google LLC</strong> y sus socios comerciales (como Google AdMob y Google AdSense) para mostrar anuncios dentro de nuestras aplicaciones y sitio web.</p>
+        <ul>
+            <li><strong>Cookies e identificadores publicitarios:</strong> Google y sus socios utilizan cookies, identificadores publicitarios de dispositivos móviles (como el ID de publicidad de Android o IDFA de Apple) y tecnologías similares para personalizar o medir la efectividad de los anuncios mostrados.</li>
+            <li><strong>Anuncios personalizados:</strong> Dependiendo de la configuración de tu dispositivo y tu ubicación geográfica (incluyendo regulaciones del EEE/Reino Unido bajo el GDPR), los anuncios pueden ser personalizados según tus intereses basados en tus interacciones con otras aplicaciones o sitios web.</li>
+            <li><strong>Control y renuncia de publicidad personalizada:</strong> Puedes inhabilitar la publicidad personalizada en cualquier momento desde la configuración de tu dispositivo móvil (Ajustes &gt; Privacidad &gt; Anuncios) o visitando la página de <a href="https://adssettings.google.com/" target="_blank" rel="noopener" class="contact-email">Configuración de anuncios de Google</a>.</li>
+        </ul>
 
-        <h2>3. Servicios de terceros</h2>
-        <p>Podemos utilizar servicios de análisis o publicidad de terceros (como Google Play Services o Firebase) que recopilan información estándar de uso de forma anónima.</p>
+        <h2>3. Servicios de terceros y análisis</h2>
+        <p>Para asegurar el correcto funcionamiento, análisis y mejora continua de nuestras aplicaciones, integramos herramientas de terceros que cumplen con los estándares globales de privacidad:</p>
+        <ul>
+            <li><strong>Google Play Services:</strong> Para autenticación y soporte general de la plataforma.</li>
+            <li><strong>Google Analytics para Firebase / Firebase Crashlytics:</strong> Para analizar errores en tiempo real y entender la interacción del usuario de manera anónima y agregada.</li>
+        </ul>
+        <p>Para conocer más sobre el tratamiento de datos por parte de Google, puedes consultar sus <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="contact-email">Políticas de Privacidad de Google</a>.</p>
 
-        <h2>4. Cambios en esta política</h2>
-        <p>Nos reservamos el derecho de actualizar nuestra Política de Privacidad en cualquier momento. Cualquier cambio será publicado en esta misma página.</p>
+        <h2>4. Privacidad infantil (COPPA)</h2>
+        <p>Nuestras aplicaciones orientadas al público general no recopilan a sabiendas información personal de niños menores de 13 años (o la edad legal correspondiente en su jurisdicción). En las aplicaciones dirigidas o accesibles a menores, nos aseguramos de configurar los servicios de publicidad de Google para cumplir con las regulaciones pertinentes, sirviendo únicamente anuncios no personalizados y adecuados para familias.</p>
 
-        <h2>5. Contacto</h2>
-        <p>Si tienes dudas o preguntas sobre esta Política de Privacidad, puedes contactarnos a través de nuestros canales oficiales.</p>
-        <p>contact@danurastudios.com</p>
+        <h2>5. Tus derechos de privacidad (GDPR / CCPA)</h2>
+        <p>Según tu lugar de residencia (incluyendo el Área Económica Europea, Reino Unido y California), posees derechos sobre tus datos, que incluyen solicitar el acceso, eliminación o restricción del uso de tus datos analíticos. Puedes ejercer estos derechos o retirar tu consentimiento publicitario a través de los ajustes de privacidad de la app o de tu dispositivo.</p>
+
+        <h2>6. Cambios en esta política</h2>
+        <p>Podemos actualizar nuestra Política de Privacidad periódicamente para reflejar cambios en nuestras prácticas o exigencias legales. Te sugerimos revisar esta página con regularidad.</p>
+
+        <h2>7. Contacto</h2>
+        <p>Si tienes cualquier duda, pregunta o solicitud relacionada con esta Política de Privacidad, puedes escribirnos a:</p>
+
+        <p><strong>Danura Studios</strong><br>
+        Correo electrónico: <a href="mailto:contact@danurastudios.com" class="contact-email">contact@danurastudios.com</a></p>
     </main>
 
     <footer>
