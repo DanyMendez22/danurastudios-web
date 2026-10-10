@@ -194,6 +194,7 @@
     </main>
 
     <footer>
+        <!-- Dejamos el href inicial apuntando directo a privacy.html para asegurar su funcionamiento inmediato -->
         <p>© 2026 Danura Studios | <a href="privacy.html" id="privacyLink">Política de Privacidad</a></p>
     </footer>
 
@@ -223,13 +224,14 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('danura_lang') || 'es';
-            document.getElementById('languageSelect').value = savedLang;
-            
-            const privacyLink = document.getElementById('privacyLink');
-            document.getElementById('subtitle').textContent = translations[savedLang].subtitle;
-            privacyLink.textContent = translations[savedLang].privacyText;
-            privacyLink.href = translations[savedLang].privacyHref;
+            const savedLang = localStorage.getItem('danura_lang');
+            if (savedLang) {
+                document.getElementById('languageSelect').value = savedLang;
+                const privacyLink = document.getElementById('privacyLink');
+                document.getElementById('subtitle').textContent = translations[savedLang].subtitle;
+                privacyLink.textContent = translations[savedLang].privacyText;
+                privacyLink.href = translations[savedLang].privacyHref;
+            }
         });
 
         // Animación de partículas en el fondo
