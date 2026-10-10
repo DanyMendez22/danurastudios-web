@@ -142,8 +142,11 @@
     <canvas id="particles"></canvas>
 
     <main>
-        <!-- alt="" evita que aparezca texto flotando si la imagen falla -->
-        <img src="logopng" alt="" class="logo-img">
+        <!-- Objeto HTML personalizado para forzar la lectura de logopng como imagen PNG -->
+        <object data="logopng" type="image/png" class="logo-img">
+            <!-- Respaldo por si el navegador exige etiqueta img estándar -->
+            <img src="logopng" alt="" class="logo-img">
+        </object>
         
         <h1>DANURA STUDIOS</h1>
         <p class="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
