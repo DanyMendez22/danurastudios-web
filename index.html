@@ -103,13 +103,25 @@
             padding: 40px 20px;
             max-width: 700px;
             animation: fadeIn 1.2s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-width: 240px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 15px 35px rgba(124, 58, 237, 0.5));
+            animation: float 4s ease-in-out infinite;
         }
 
         h1 {
             font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
             letter-spacing: 1.5px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -146,7 +158,12 @@
             text-decoration: underline;
         }
 
-        /* Animación de entrada */
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -169,6 +186,9 @@
     <canvas id="particles"></canvas>
 
     <main>
+        <!-- Llamada al archivo logo.png ubicado en la raíz -->
+        <img src="logo.png" alt="Danura Studios Logo" class="logo-img" onerror="this.style.display='none';">
+        
         <h1 id="title">DANURA STUDIOS</h1>
         <p class="subtitle" id="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
     </main>
@@ -210,7 +230,7 @@
             }
         });
 
-        // Animación fluida de partículas en el fondo
+        // Animación de partículas en el fondo
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
 
