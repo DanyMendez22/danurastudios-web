@@ -105,23 +105,15 @@
             animation: fadeIn 1.2s ease-out;
         }
 
-        .logo-img {
-            max-width: 260px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 24px;
-            filter: drop-shadow(0 15px 35px rgba(124, 58, 237, 0.5));
-            animation: float 4s ease-in-out infinite;
-        }
-
         h1 {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
         }
 
         p.subtitle {
@@ -139,132 +131,3 @@
             z-index: 10;
             padding: 24px;
             font-size: 0.9rem;
-            color: #94a3b8;
-        }
-
-        footer a {
-            color: #c084fc;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        /* Animaciones */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Selector de Idioma -->
-    <div class="lang-selector">
-        <select id="languageSelect" onchange="changeLanguage()">
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-        </select>
-    </div>
-
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <canvas id="particles"></canvas>
-
-    <main>
-        <img src="logo.png" alt="Danura Studios Logo" class="logo-img" onerror="this.style.display='none';">
-        
-        <h1 id="title">DANURA STUDIOS</h1>
-        <p class="subtitle" id="subtitle">Estudio de desarrollo de aplicaciones y juegos móviles.</p>
-    </main>
-
-    <footer>
-        <p>© 2026 Danura Studios | <a href="privacy.html" id="privacyLink">Política de Privacidad</a></p>
-    </footer>
-
-    <script>
-        const translations = {
-            es: {
-                subtitle: "Estudio de desarrollo de aplicaciones y juegos móviles.",
-                privacyText: "Política de Privacidad",
-                privacyHref: "privacy.html"
-            },
-            en: {
-                subtitle: "Mobile application and game development studio.",
-                privacyText: "Privacy Policy",
-                privacyHref: "privacy-en.html"
-            }
-        };
-
-        function changeLanguage() {
-            const lang = document.getElementById('languageSelect').value;
-            
-            // Actualizar texto y enlace
-            document.getElementById('subtitle').textContent = translations[lang].subtitle;
-            const privacyLink = document.getElementById('privacyLink');
-            privacyLink.textContent = translations[lang].privacyText;
-            privacyLink.href = translations[lang].privacyHref;
-            
-            // Guardar preferencia
-            localStorage.setItem('danura_lang', lang);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('danura_lang');
-            if (savedLang) {
-                document.getElementById('languageSelect').value = savedLang;
-                changeLanguage();
-            }
-        });
-
-        // Partículas de fondo
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        const particles = Array.from({ length: 60 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 2 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
-            alpha: Math.random() * 0.7 + 0.3
-        }));
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.speedX;
-                p.y += p.speedY;
-
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
-
-                ctx.fillStyle = `rgba(192, 132, 252, ${p.alpha})`;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
